@@ -7,4 +7,4 @@ include_directories(.)
 
 add_executable(dgemm
         dgemm.cpp
-        dgemm.h)
+        MMIOReader.cpp MMIOReader.hpp Matrix.hpp Vector.hpp)
