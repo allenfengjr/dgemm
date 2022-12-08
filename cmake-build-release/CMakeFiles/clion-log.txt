@@ -1,0 +1,4 @@
+/opt/homebrew/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/opt/homebrew/bin/gcc-12 -DCMAKE_CXX_COMPILER=/opt/homebrew/bin/mpicc -G "CodeBlocks - Unix Makefiles" -S /Users/haofeng-admin/dgemm -B /Users/haofeng-admin/dgemm/cmake-build-release
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/haofeng-admin/dgemm/cmake-build-release

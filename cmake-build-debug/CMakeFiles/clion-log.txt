@@ -1,6 +1,4 @@
-"/Users/haofeng-admin/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /Users/haofeng-admin/dgemm -B /Users/haofeng-admin/dgemm/cmake-build-debug
-CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-  CMake 3.24 or higher is required.  You are running version 3.23.2
-
-
--- Configuring incomplete, errors occurred!
+/opt/homebrew/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/opt/homebrew/bin/gcc-12 -DCMAKE_CXX_COMPILER=/opt/homebrew/bin/mpicc -G "CodeBlocks - Unix Makefiles" -S /Users/haofeng-admin/dgemm -B /Users/haofeng-admin/dgemm/cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/haofeng-admin/dgemm/cmake-build-debug
