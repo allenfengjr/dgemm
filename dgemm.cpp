@@ -70,14 +70,19 @@ int main(int argc, char* argv[]){
                 //copy one row
                 std::copy(A.begin()+A_start+i*ll,A.begin()+A_start+i*ll+l_size,A_v.begin()+A_count);
                 A_count += l_size;
+                std::cout<<A_count<<std::endl;
             }
             for (int i = 0; i < l_size; ++i) {
                 std::copy(B.begin()+B_start+i*nn,B.begin()+B_start+i*nn+n_size,B_v.begin()+B_count);
                 B_count += n_size;
+                std::cout<<B_count<<std::endl;
+
             }
             for (int i = 0; i < m_size; ++i) {
                 std::copy(C.begin()+C_start+i*nn,C.begin()+C_start+i*nn+n_size,C_v.begin()+C_count);
                 C_count += n_size;
+                std::cout<<C_count<<std::endl;
+
             }
         }
         std::cout<<"root setup finished"<<std::endl;
