@@ -70,7 +70,6 @@ int main(int argc, char* argv[]){
                 //copy one row
                 std::copy(A.begin()+A_start+i*ll,A.begin()+A_start+i*ll+l_size,A_v.begin()+A_count);
                 A_count += l_size;
-                std::cout<<A_count<<std::endl;
             }
             for (int i = 0; i < l_size; ++i) {
                 std::copy(B.begin()+B_start+i*nn,B.begin()+B_start+i*nn+n_size,B_v.begin()+B_count);
@@ -91,8 +90,8 @@ int main(int argc, char* argv[]){
     MPI_Barrier(MPI_COMM_WORLD);//I do not know if this is needed.
     std::cout<<"can reach there\n";
     MPI_Scatter(A_v.data(),m_size*l_size,MPI_DOUBLE,sub_A.data(),m_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
-    MPI_Scatter(B_v.data(),n_size*l_size,MPI_DOUBLE,sub_B.data(),n_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
-    MPI_Scatter(C_v.data(),m_size*n_size,MPI_DOUBLE,sub_C.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    //MPI_Scatter(B_v.data(),n_size*l_size,MPI_DOUBLE,sub_B.data(),n_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    //MPI_Scatter(C_v.data(),m_size*n_size,MPI_DOUBLE,sub_C.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     std::cout<<"rank"<<my_rank<<"can reach there\n";
     /*
     int nbrs[4],dims[2]={k,k},periods[2]={1,1},reorder=0,coords[2];
