@@ -101,6 +101,8 @@ int main(int argc, char* argv[]){
     std::cout<<my_rank<<" "<<nbrs[0]<<" "<<nbrs[1]<<" "<<nbrs[2]<<" "<<nbrs[3]<<std::endl;
     MPI_Cart_shift(cartcomm,0,1,&nbrs[0],&nbrs[1]);
     MPI_Cart_shift(cartcomm,1,1,&nbrs[2],&nbrs[3]);
+    std::cout<<my_rank<<" "<<nbrs[0]<<" "<<nbrs[1]<<" "<<nbrs[2]<<" "<<nbrs[3]<<std::endl;
+
     //MPI_Sendrecv_replace(sub_A.data(),m_size*l_size,MPI_DOUBLE,nbrs[2],3,nbrs[3],3,MPI_COMM_WORLD,&status);
     //MPI_Sendrecv_replace(sub_B.data(),l_size*n_size,MPI_DOUBLE,nbrs[0],4,nbrs[1],4,MPI_COMM_WORLD,&status);
 
