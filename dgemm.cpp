@@ -93,7 +93,7 @@ int main(int argc, char* argv[]){
     MPI_Scatter(B_v.data(),n_size*l_size,MPI_DOUBLE,sub_B.data(),n_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     MPI_Scatter(C_v.data(),m_size*n_size,MPI_DOUBLE,sub_C.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     std::cout<<"rank"<<my_rank<<"can reach there\n";
-    /*
+
     int nbrs[4],dims[2]={k,k},periods[2]={1,1},reorder=0,coords[2];
     MPI_Comm cartcomm;
     MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,reorder,&cartcomm);
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]){
     MPI_Cart_shift(cartcomm,1,1,&nbrs[2],&nbrs[3]);
     //MPI_Sendrecv_replace(sub_A.data(),m_size*l_size,MPI_DOUBLE,nbrs[2],3,nbrs[3],3,MPI_COMM_WORLD,&status);
     //MPI_Sendrecv_replace(sub_B.data(),l_size*n_size,MPI_DOUBLE,nbrs[0],4,nbrs[1],4,MPI_COMM_WORLD,&status);
-    */
+
     //3. Do k-times multiplication and movement, use OpenMP at the multiplication part.
     // multiplication
 
@@ -120,6 +120,8 @@ int main(int argc, char* argv[]){
                 }
             }
         }
+        MPI_Barrier(cartcomm);
+        
     }
     // Gather all the result
     MPI_Barrier(MPI_COMM_WORLD);
