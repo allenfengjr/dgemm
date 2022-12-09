@@ -103,12 +103,12 @@ int main(int argc, char* argv[]){
     */
     //3. Do k-times multiplication and movement, use OpenMP at the multiplication part.
     // multiplication
-
+/*
 #pragma omp parallel for
     for (int i = 0; i < m_size*n_size; ++i) {
         sub_C[i] *= beta;
     }
-    /*
+
     for (int p = 0; p < k; ++p) {
 #pragma omp parallel for
         for (int j = 0; j < n_size; ++j) {
