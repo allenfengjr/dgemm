@@ -110,7 +110,7 @@ int main(int argc, char* argv[]){
     for (int i = 0; i < m_size*n_size; ++i) {
         sub_C[i] *= beta;
     }
-/*
+
     for (int p = 0; p < k; ++p) {
 #pragma omp parallel for
         for (int j = 0; j < n_size; ++j) {
@@ -121,8 +121,8 @@ int main(int argc, char* argv[]){
             }
         }
     }
-     */
     // Gather all the result
     MPI_Barrier(MPI_COMM_WORLD);
+    std::cout<<"result of one element is"<<sub_C[12]<<std::endl;
     MPI_Finalize();
 }
