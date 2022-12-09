@@ -44,9 +44,9 @@ int main(int argc, char* argv[]){
     std::vector<int> sub_A(m_size*l_size);
     std::vector<int> sub_B(l_size*n_size);
     std::vector<int> sub_C(m_size*n_size);
-    std::vector<double> A_v(0);
-    std::vector<double> B_v(0);
-    std::vector<double> C_v(0);
+    std::vector<double> A_v(1);
+    std::vector<double> B_v(1);
+    std::vector<double> C_v(1);
     if(my_rank==0){
         //generate three matrix, row-major
         std::cout<<"root setup start"<<std::endl;
