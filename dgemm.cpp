@@ -8,6 +8,7 @@
 #include <chrono>                   // std::chrono::high_resolution_clock::now()
 #include <cmath>                    // std::sin, M_PI
 #include <numeric>                  // std::transform_reduce
+#include <vector>
 
 /*
  * args usage:
