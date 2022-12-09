@@ -98,6 +98,7 @@ int main(int argc, char* argv[]){
     MPI_Comm cartcomm;
     MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,reorder,&cartcomm);
     MPI_Cart_coords(cartcomm,my_rank,2,coords);
+    std::cout<<my_rank<<" "<<coords[0]<<" "<<coords[1]<< std::endl;
     MPI_Cart_shift(cartcomm, 0, coords[1], &udlr[0], &udlr[1]);
     MPI_Cart_shift(cartcomm, 1, coords[0], &udlr[2], &udlr[3]);
     std::cout << my_rank << " " << udlr[0] << " " << udlr[1] << " " << udlr[2] << " " << udlr[3] << std::endl;
