@@ -80,6 +80,11 @@ int main(int argc, char* argv[]){
             }
         }
     }
+    else{
+        std::vector<double> A_v(0);
+        std::vector<double> B_v(0);
+        std::vector<double> C_v(0);
+    }
 
     //2. Permute Sub-Matrix
     // other processes wait until root read all three matrix
@@ -99,6 +104,7 @@ int main(int argc, char* argv[]){
 
     //3. Do k-times multiplication and movement, use OpenMP at the multiplication part.
     // multiplication
+    /*
 #pragma omp parallel for
     for (int i = 0; i < m_size*n_size; ++i) {
         sub_C[i] *= beta;
@@ -113,5 +119,7 @@ int main(int argc, char* argv[]){
             }
         }
     }
+     */
     // Gather all the result
+    MPI_Finalize();
 }
