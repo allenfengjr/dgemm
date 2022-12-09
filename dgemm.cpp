@@ -94,16 +94,16 @@ int main(int argc, char* argv[]){
     MPI_Scatter(C_v.data(),m_size*n_size,MPI_DOUBLE,sub_C.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     std::cout<<"rank"<<my_rank<<"can reach there\n";
 
-    int nbrs[4],dims[2]={k,k},periods[2]={1,1},reorder=0,coords[2];
+    int udlr[4],dims[2]={k, k},periods[2]={1, 1},reorder=0,coords[2];
     MPI_Comm cartcomm;
     MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,reorder,&cartcomm);
     MPI_Cart_coords(cartcomm,my_rank,2,coords);
-    MPI_Cart_shift(cartcomm,0,2,&nbrs[0],&nbrs[1]);
-    MPI_Cart_shift(cartcomm,1,2,&nbrs[2],&nbrs[3]);
-    std::cout<<my_rank<<" "<<nbrs[0]<<" "<<nbrs[1]<<" "<<nbrs[2]<<" "<<nbrs[3]<<std::endl;
+    MPI_Cart_shift(cartcomm, 0, coords[1], &udlr[0], &udlr[1]);
+    MPI_Cart_shift(cartcomm, 1, coords[0], &udlr[2], &udlr[3]);
+    std::cout << my_rank << " " << udlr[0] << " " << udlr[1] << " " << udlr[2] << " " << udlr[3] << std::endl;
 
-    MPI_Sendrecv_replace(sub_A.data(),m_size*l_size,MPI_DOUBLE,nbrs[2],3,nbrs[3],3,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-    MPI_Sendrecv_replace(sub_B.data(),l_size*n_size,MPI_DOUBLE,nbrs[0],4,nbrs[1],4,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+    MPI_Sendrecv_replace(sub_A.data(),m_size*l_size, MPI_DOUBLE, udlr[2], 3, udlr[3], 3, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Sendrecv_replace(sub_B.data(),l_size*n_size, MPI_DOUBLE, udlr[0], 4, udlr[1], 4, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
     //3. Do k-times multiplication and movement, use OpenMP at the multiplication part.
     // multiplication
