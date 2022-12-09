@@ -41,12 +41,12 @@ int main(int argc, char* argv[]){
     int nn = n_size*k;
     int ll = l_size*k;
     //create the buffer
-    std::vector<int> sub_A(m_size*l_size);
-    std::vector<int> sub_B(l_size*n_size);
-    std::vector<int> sub_C(m_size*n_size);
-    std::vector<double> A_v(m_size*l_size*n_ranks);
-    std::vector<double> B_v(l_size*n_size*n_ranks);
-    std::vector<double> C_v(m_size*n_size*n_ranks);
+    std::vector<double> sub_A(m_size*l_size);
+    std::vector<double> sub_B(l_size*n_size);
+    std::vector<double> sub_C(m_size*n_size);
+    std::vector<double> A_v(1);
+    std::vector<double> B_v(1);
+    std::vector<double> C_v(1);
     if(my_rank==0){
         //generate three matrix, row-major
         std::cout<<"root setup start"<<std::endl;
