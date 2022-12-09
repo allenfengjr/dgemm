@@ -90,6 +90,7 @@ int main(int argc, char* argv[]){
     MPI_Scatter(A_v.data(),m_size*l_size,MPI_DOUBLE,sub_A.data(),m_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     MPI_Scatter(B_v.data(),n_size*l_size,MPI_DOUBLE,sub_B.data(),n_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     MPI_Scatter(C_v.data(),m_size*n_size,MPI_DOUBLE,sub_C.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    std::cout<<"rank"<<my_rank<<"can reach there\n";
     /*
     int nbrs[4],dims[2]={k,k},periods[2]={1,1},reorder=0,coords[2];
     MPI_Comm cartcomm;
