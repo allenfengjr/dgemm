@@ -1,4 +1,4 @@
-set(CMAKE_CXX_COMPILER "/opt/homebrew/bin/mpicc")
+set(CMAKE_CXX_COMPILER "/opt/homebrew/bin/mpicxx")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 set(CMAKE_CXX_COMPILER_VERSION "14.0.0.14000029")

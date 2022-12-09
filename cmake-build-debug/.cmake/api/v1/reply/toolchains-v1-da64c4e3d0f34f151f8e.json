@@ -5,36 +5,28 @@
 		{
 			"compiler" : 
 			{
-				"id" : "GNU",
+				"id" : "AppleClang",
 				"implicit" : 
 				{
 					"includeDirectories" : 
 					[
-						"/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current/gcc/aarch64-apple-darwin21/12/include",
-						"/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current/gcc/aarch64-apple-darwin21/12/include-fixed",
-						"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include",
-						"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/System/Library/Frameworks"
+						"/usr/include",
+						"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include"
 					],
 					"linkDirectories" : 
 					[
-						"/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current/gcc/aarch64-apple-darwin21/12",
-						"/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current/gcc",
-						"/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current",
+						"/opt/homebrew/Cellar/open-mpi/4.1.4_2/lib",
+						"/opt/homebrew/opt/libevent/lib",
 						"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/lib"
 					],
 					"linkFrameworkDirectories" : 
 					[
 						"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/System/Library/Frameworks"
 					],
-					"linkLibraries" : 
-					[
-						"emutls_w",
-						"gcc",
-						"gcc"
-					]
+					"linkLibraries" : []
 				},
-				"path" : "/opt/homebrew/bin/gcc-12",
-				"version" : "12.2.0"
+				"path" : "/opt/homebrew/bin/mpicc",
+				"version" : "14.0.0.14000029"
 			},
 			"language" : "C",
 			"sourceFileExtensions" : 
@@ -66,7 +58,7 @@
 					],
 					"linkLibraries" : []
 				},
-				"path" : "/opt/homebrew/bin/mpicc",
+				"path" : "/opt/homebrew/bin/mpicxx",
 				"version" : "14.0.0.14000029"
 			},
 			"language" : "CXX",

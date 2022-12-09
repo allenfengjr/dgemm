@@ -73,15 +73,15 @@ CMakeFiles/dgemm.dir/dgemm.cpp.o: CMakeFiles/dgemm.dir/flags.make
 CMakeFiles/dgemm.dir/dgemm.cpp.o: /Users/haofeng-admin/dgemm/dgemm.cpp
 CMakeFiles/dgemm.dir/dgemm.cpp.o: CMakeFiles/dgemm.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/haofeng-admin/dgemm/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/dgemm.dir/dgemm.cpp.o"
-	/opt/homebrew/bin/mpicc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dgemm.dir/dgemm.cpp.o -MF CMakeFiles/dgemm.dir/dgemm.cpp.o.d -o CMakeFiles/dgemm.dir/dgemm.cpp.o -c /Users/haofeng-admin/dgemm/dgemm.cpp
+	/opt/homebrew/bin/mpicxx $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dgemm.dir/dgemm.cpp.o -MF CMakeFiles/dgemm.dir/dgemm.cpp.o.d -o CMakeFiles/dgemm.dir/dgemm.cpp.o -c /Users/haofeng-admin/dgemm/dgemm.cpp
 
 CMakeFiles/dgemm.dir/dgemm.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dgemm.dir/dgemm.cpp.i"
-	/opt/homebrew/bin/mpicc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/haofeng-admin/dgemm/dgemm.cpp > CMakeFiles/dgemm.dir/dgemm.cpp.i
+	/opt/homebrew/bin/mpicxx $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/haofeng-admin/dgemm/dgemm.cpp > CMakeFiles/dgemm.dir/dgemm.cpp.i
 
 CMakeFiles/dgemm.dir/dgemm.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dgemm.dir/dgemm.cpp.s"
-	/opt/homebrew/bin/mpicc $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/haofeng-admin/dgemm/dgemm.cpp -o CMakeFiles/dgemm.dir/dgemm.cpp.s
+	/opt/homebrew/bin/mpicxx $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/haofeng-admin/dgemm/dgemm.cpp -o CMakeFiles/dgemm.dir/dgemm.cpp.s
 
 # Object files for target dgemm
 dgemm_OBJECTS = \
