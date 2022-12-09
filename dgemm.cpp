@@ -46,15 +46,18 @@ int main(int argc, char* argv[]){
     std::vector<int> sub_A(m_size*l_size);
     std::vector<int> sub_B(l_size*n_size);
     std::vector<int> sub_C(m_size*n_size);
+    std::vector<double> A_v(0);
+    std::vector<double> B_v(0);
+    std::vector<double> C_v(0);
     if(my_rank==0){
         //generate three matrix, row-major
         std::vector<double> A(m_size*l_size*n_ranks,1.0);
         std::vector<double> B(l_size*n_size*n_ranks,1.0);
         std::vector<double> C(m_size*n_size*n_ranks,1.0);
         //re-order the data for the following MPI_Scatter
-        std::vector<double> A_v(m_size*l_size*n_ranks);
-        std::vector<double> B_v(l_size*n_size*n_ranks);
-        std::vector<double> C_v(m_size*n_size*n_ranks);
+        A_v.resize(m_size*l_size*n_ranks);
+        B_v.resize(l_size*n_size*n_ranks);
+        C_v.resize(m_size*n_size*n_ranks);
         int A_count = 0, B_count = 0, C_count = 0;
         for (int p = 0; p < n_ranks; ++p) {
             //assign every sub-matrix, in my program, because all nodes except root node do not have sub-matrix
@@ -78,11 +81,6 @@ int main(int argc, char* argv[]){
                 C_count += n_size;
             }
         }
-    }
-    else{
-        std::vector<double> A_v(0);
-        std::vector<double> B_v(0);
-        std::vector<double> C_v(0);
     }
 
     //2. Permute Sub-Matrix
