@@ -121,5 +121,6 @@ int main(int argc, char* argv[]){
     }
      */
     // Gather all the result
+    MPI_Barrier(MPI_COMM_WORLD);
     MPI_Finalize();
 }
