@@ -3,14 +3,12 @@
 //
 
 #include "iostream"
-#include "MMIOReader.hpp"
 #include <omp.h>
 #include "mpi.h"
 #include <chrono>                   // std::chrono::high_resolution_clock::now()
 #include <cmath>                    // std::sin, M_PI
 #include <numeric>                  // std::transform_reduce
-#include "Matrix.hpp"
-#include "Vector.hpp"
+
 /*
  * args usage:
  * argv[1],[2],[3] matrix block size m, l, n

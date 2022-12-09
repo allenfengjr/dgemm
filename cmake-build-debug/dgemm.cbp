@@ -90,25 +90,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/haofeng-admin/dgemm/MMIOReader.cpp">
-			<Option target="dgemm"/>
-		</Unit>
-		<Unit filename="/Users/haofeng-admin/dgemm/MMIOReader.hpp">
-			<Option target="dgemm"/>
-		</Unit>
-		<Unit filename="/Users/haofeng-admin/dgemm/Matrix.hpp">
-			<Option target="dgemm"/>
-		</Unit>
-		<Unit filename="/Users/haofeng-admin/dgemm/Vector.hpp">
-			<Option target="dgemm"/>
-		</Unit>
 		<Unit filename="/Users/haofeng-admin/dgemm/dgemm.cpp">
-			<Option target="dgemm"/>
-		</Unit>
-		<Unit filename="/Users/haofeng-admin/dgemm/mmio.c">
-			<Option target="dgemm"/>
-		</Unit>
-		<Unit filename="/Users/haofeng-admin/dgemm/mmio.h">
 			<Option target="dgemm"/>
 		</Unit>
 		<Unit filename="/Users/haofeng-admin/dgemm/CMakeLists.txt">

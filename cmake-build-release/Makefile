@@ -129,30 +129,6 @@ dgemm/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dgemm.dir/build.make CMakeFiles/dgemm.dir/build
 .PHONY : dgemm/fast
 
-MMIOReader.o: MMIOReader.cpp.o
-.PHONY : MMIOReader.o
-
-# target to build an object file
-MMIOReader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dgemm.dir/build.make CMakeFiles/dgemm.dir/MMIOReader.cpp.o
-.PHONY : MMIOReader.cpp.o
-
-MMIOReader.i: MMIOReader.cpp.i
-.PHONY : MMIOReader.i
-
-# target to preprocess a source file
-MMIOReader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dgemm.dir/build.make CMakeFiles/dgemm.dir/MMIOReader.cpp.i
-.PHONY : MMIOReader.cpp.i
-
-MMIOReader.s: MMIOReader.cpp.s
-.PHONY : MMIOReader.s
-
-# target to generate assembly for a file
-MMIOReader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dgemm.dir/build.make CMakeFiles/dgemm.dir/MMIOReader.cpp.s
-.PHONY : MMIOReader.cpp.s
-
 dgemm.o: dgemm.cpp.o
 .PHONY : dgemm.o
 
@@ -177,30 +153,6 @@ dgemm.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dgemm.dir/build.make CMakeFiles/dgemm.dir/dgemm.cpp.s
 .PHONY : dgemm.cpp.s
 
-mmio.o: mmio.c.o
-.PHONY : mmio.o
-
-# target to build an object file
-mmio.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dgemm.dir/build.make CMakeFiles/dgemm.dir/mmio.c.o
-.PHONY : mmio.c.o
-
-mmio.i: mmio.c.i
-.PHONY : mmio.i
-
-# target to preprocess a source file
-mmio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dgemm.dir/build.make CMakeFiles/dgemm.dir/mmio.c.i
-.PHONY : mmio.c.i
-
-mmio.s: mmio.c.s
-.PHONY : mmio.s
-
-# target to generate assembly for a file
-mmio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dgemm.dir/build.make CMakeFiles/dgemm.dir/mmio.c.s
-.PHONY : mmio.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -210,15 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... dgemm"
-	@echo "... MMIOReader.o"
-	@echo "... MMIOReader.i"
-	@echo "... MMIOReader.s"
 	@echo "... dgemm.o"
 	@echo "... dgemm.i"
 	@echo "... dgemm.s"
-	@echo "... mmio.o"
-	@echo "... mmio.i"
-	@echo "... mmio.s"
 .PHONY : help
 
 

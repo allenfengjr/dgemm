@@ -8,8 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/haofeng-admin/dgemm/mmio.c" "CMakeFiles/dgemm.dir/mmio.c.o" "gcc" "CMakeFiles/dgemm.dir/mmio.c.o.d"
-  "/Users/haofeng-admin/dgemm/MMIOReader.cpp" "CMakeFiles/dgemm.dir/MMIOReader.cpp.o" "gcc" "CMakeFiles/dgemm.dir/MMIOReader.cpp.o.d"
   "/Users/haofeng-admin/dgemm/dgemm.cpp" "CMakeFiles/dgemm.dir/dgemm.cpp.o" "gcc" "CMakeFiles/dgemm.dir/dgemm.cpp.o.d"
   )
 
