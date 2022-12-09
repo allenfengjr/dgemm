@@ -13,17 +13,15 @@
 /*
  * args usage:
  * argv[1],[2],[3] matrix block size m, l, n
- * argv[4] OpenMP #Thread per task -- default 1
- * argv[5] the value of alpha -- default 1
- * argv[6] the value of beta -- default 0
+ * argv[4] the value of alpha -- default 1
+ * argv[5] the value of beta -- default 0
  * */
 int main(int argc, char* argv[]){
-    if(argc!=7){
+    if(argc!=6){
         std::cout<<"please check your input"<<std::endl;
     }
-    int num_openmp_threads = atoi(argv[4]);
-    double alpha = atof(argv[5]);
-    double beta = atof(argv[6]);
+    double alpha = atof(argv[4]);
+    double beta = atof(argv[5]);
     MPI_Init(nullptr,nullptr);
     int my_rank = -1;
     MPI_Comm_rank(MPI_COMM_WORLD,&my_rank);
