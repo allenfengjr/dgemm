@@ -51,8 +51,8 @@ int main(int argc, char* argv[]){
         //generate three matrix, row-major
         std::cout<<"root setup start"<<std::endl;
         std::vector<double> A(m_size*l_size*n_ranks,1.0);
-        std::vector<double> B(l_size*n_size*n_ranks,1.0);
-        std::vector<double> C(m_size*n_size*n_ranks,1.0);
+        std::vector<double> B(l_size*n_size*n_ranks,2.0);
+        std::vector<double> C(m_size*n_size*n_ranks,3.0);
         //re-order the data for the following MPI_Scatter
         A_v.resize(m_size*l_size*n_ranks);
         B_v.resize(l_size*n_size*n_ranks);
@@ -91,9 +91,10 @@ int main(int argc, char* argv[]){
     MPI_Scatter(A_v.data(),m_size*l_size,MPI_DOUBLE,sub_A.data(),m_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     MPI_Scatter(B_v.data(),n_size*l_size,MPI_DOUBLE,sub_B.data(),n_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     MPI_Scatter(C_v.data(),m_size*n_size,MPI_DOUBLE,sub_C.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
-    int udlr[4],dims[2]={k, k},periods[2]={1, 1},reorder=0,coords[2];
+    //up,down,left,right neighbor
+    int udlr[4],dims[2]={k, k},periods[2]={1, 1},coords[2];
     MPI_Comm cart_comm;
-    MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,reorder,&cart_comm);
+    MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,0,&cart_comm);
     MPI_Cart_coords(cart_comm,my_rank,2,coords);
     std::cout<<my_rank<<" "<<coords[0]<<" "<<coords[1]<< std::endl;
     MPI_Cart_shift(cart_comm, 0, coords[1], &udlr[0], &udlr[1]);
@@ -105,7 +106,7 @@ int main(int argc, char* argv[]){
 
     //3. Do k-times multiplication and movement, use OpenMP at the multiplication part.
     // multiplication
-
+    auto start_time = std::chrono::steady_clock::now();
 #pragma omp parallel for
     for (int i = 0; i < m_size*n_size; ++i) {
         sub_C[i] *= beta;
@@ -125,7 +126,10 @@ int main(int argc, char* argv[]){
         MPI_Sendrecv_replace(sub_B.data(),l_size*n_size,MPI_DOUBLE,udlr[0],4,udlr[1],4,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
     }
     // Gather all the result
+    MPI_Gather(sub_C.data(),m_size*n_size,MPI_DOUBLE,C_v.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    auto end_time = std::chrono::steady_clock::now();
+    auto time = end_time - start_time;
+    double ns = time.count();                   // time in nanoseconds
     MPI_Barrier(MPI_COMM_WORLD);
-    std::cout<<"result of one element is"<<sub_C[12]<<std::endl;
     MPI_Finalize();
 }
