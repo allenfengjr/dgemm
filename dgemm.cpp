@@ -40,54 +40,71 @@ int main(int argc, char* argv[]){
     int m_size= atoi(argv[1]);
     int l_size= atoi(argv[2]);
     int n_size= atoi(argv[3]);
-    if(my_rank==0){
-        //generate three matrix, row-major
-        std::vector<double> A(m_size*l_size*n_ranks,1.0);
-        std::vector<double> B(l_size*n_size*n_ranks,1.0);
-        std::vector<double> C(m_size*n_size*n_ranks,1.0);
-    }
-
+    int mm = m_size*k;
+    int nn = n_size*k;
+    int ll = l_size*k;
     //create the buffer
     std::vector<int> sub_A(m_size*l_size);
     std::vector<int> sub_B(l_size*n_size);
     std::vector<int> sub_C(m_size*n_size);
     if(my_rank==0){
+        //generate three matrix, row-major
+        std::vector<double> A(m_size*l_size*n_ranks,1.0);
+        std::vector<double> B(l_size*n_size*n_ranks,1.0);
+        std::vector<double> C(m_size*n_size*n_ranks,1.0);
         //re-order the data for the following MPI_Scatter
-        std::vector<double> A_v(m_size*l_size);
-        std::vector<double> B_v(l_size*n_size);
-        std::vector<double> C_v(m_size*n_size);
+        std::vector<double> A_v(m_size*l_size*n_ranks);
+        std::vector<double> B_v(l_size*n_size*n_ranks);
+        std::vector<double> C_v(m_size*n_size*n_ranks);
         int A_count = 0, B_count = 0, C_count = 0;
         for (int p = 0; p < n_ranks; ++p) {
             //assign every sub-matrix, in my program, because all nodes except root node do not have sub-matrix
             //I just sent them the right sub-matrix after first shift. So they do not need to shift 1-k steps.
-            int A_start = l_size *
-            int B_start = n_size * l_start[p/k] + l_spilt[p/k]*n_start[p%k];
-            for(int i = 0; i < m_spilt[p%k];++i){
+            int ii = p/k;
+            int jj = p%k;
+            int A_start = ii*k*(m_size*l_size) + jj*l_size;
+            int B_start = ii*k*(l_size*n_size) + jj*n_size;
+            int C_start = ii*k*(m_size*n_size) + jj*n_size;
+            for(int i = 0; i < m_size;++i){
                 //copy one row
-                std::copy(A.begin()+(m_start[p%]))
+                std::copy(A.begin()+A_start+i*ll,A.begin()+A_start+i*ll+l_size,A_v.begin()+A_count);
+                A_count += l_size;
             }
-
+            for (int i = 0; i < l_size; ++i) {
+                std::copy(B.begin()+B_start+i*nn,A.begin()+A_start+i*nn+n_size,B_v.begin()+B_count);
+                B_count += n_size;
+            }
+            for (int i = 0; i < m_size; ++i) {
+                std::copy(C.begin()+C_start+i*nn,C.begin()+C_start+i*nn+n_size,C_v.begin()+C_count);
+                C_count += n_size;
+            }
         }
-
     }
-    // other processes wait until root read all three matrix
-    MPI_Barrier(MPI_COMM_WORLD);//I do not know if this is needed.
-
 
     //2. Permute Sub-Matrix
-    MPI_Scatterv(B_v);
+    // other processes wait until root read all three matrix
+    MPI_Barrier(MPI_COMM_WORLD);//I do not know if this is needed.
+    MPI_Scatter(A_v.data(),m_size*l_size,MPI_DOUBLE,sub_A.data(),m_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    MPI_Scatter(B_v.data(),n_size*l_size,MPI_DOUBLE,sub_B.data(),n_size*l_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    MPI_Scatter(C_v.data(),m_size*n_size,MPI_DOUBLE,sub_C.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
+
     int nbrs[4],dims[2]={k,k},periods[2]={1,1},reorder=0,coords[2];
     MPI_Comm cartcomm;
     MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,reorder,&cartcomm);
     MPI_Cart_coords(cartcomm,my_rank,2,coords);
     MPI_Cart_shift(cartcomm,0,1,&nbrs[0],&nbrs[1]);
     MPI_Cart_shift(cartcomm,1,1,&nbrs[2],&nbrs[3]);
-    MPI_Sendrecv_replace(sub_A.data(),3232,MPI_DOUBLE,nbrs[2],3,nbrs[3],3,MPI_COMM_WORLD,&status);
-    MPI_Sendrecv_replace(sub_B.data(),1323,MPI_DOUBLE,nbrs[0],4,nbrs[1],4,MPI_COMM_WORLD,&status);
+    MPI_Sendrecv_replace(sub_A.data(),m_size*l_size,MPI_DOUBLE,nbrs[2],3,nbrs[3],3,MPI_COMM_WORLD,&status);
+    MPI_Sendrecv_replace(sub_B.data(),l_size*n_size,MPI_DOUBLE,nbrs[0],4,nbrs[1],4,MPI_COMM_WORLD,&status);
 
     //3. Do k-times multiplication and movement, use OpenMP at the multiplication part.
     // multiplication
+#pragma omp parallel for
+    for (int i = 0; i < m_size*n_size; ++i) {
+        sub_C[i] *= beta;
+    }
     for (int p = 0; p < k; ++p) {
+#pragma omp parallel for
         for (int j = 0; j < n_size; ++j) {
             for (int l = 0; l < l_size; ++l) {
                 for (int i = 0; i < m_size; ++i) {
@@ -96,7 +113,5 @@ int main(int argc, char* argv[]){
             }
         }
     }
-    //
-
-    // I can not use MPI_sendrecv_replace if the sub-matrix size is different, however, I can achieve this by padding
+    // Gather all the result
 }
