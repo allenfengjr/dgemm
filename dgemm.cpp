@@ -72,7 +72,7 @@ int main(int argc, char* argv[]){
                 A_count += l_size;
             }
             for (int i = 0; i < l_size; ++i) {
-                std::copy(B.begin()+B_start+i*nn,A.begin()+A_start+i*nn+n_size,B_v.begin()+B_count);
+                std::copy(B.begin()+B_start+i*nn,B.begin()+B_start+i*nn+n_size,B_v.begin()+B_count);
                 B_count += n_size;
             }
             for (int i = 0; i < m_size; ++i) {
