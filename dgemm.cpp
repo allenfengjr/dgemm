@@ -129,7 +129,7 @@ int main(int argc, char* argv[]){
     MPI_Gather(sub_C.data(),m_size*n_size,MPI_DOUBLE,C_v.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     auto end_time = std::chrono::steady_clock::now();
     auto time = end_time - start_time;
-    double ns = time.count()/1000;                   // time in nanoseconds
+    double ns = time.count()/1000000;                   // time in nanoseconds
     MPI_Barrier(MPI_COMM_WORLD);
     double min = 0;
     double max = 0;
@@ -140,7 +140,7 @@ int main(int argc, char* argv[]){
     MPI_Allreduce(&ns, &avg, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
     avg /= n_ranks;
     if(my_rank==0) {
-        std::cout << "min: " << min << ", max: " << max << ", avg: " << avg << std::endl;
+        std::cout << "min: " << min << "ms , max: " << max << "ms , avg: " << avg <<"ms" <<std::endl;
     }
     MPI_Finalize();
 }
