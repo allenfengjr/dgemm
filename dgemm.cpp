@@ -96,11 +96,9 @@ int main(int argc, char* argv[]){
     MPI_Comm cart_comm;
     MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,0,&cart_comm);
     MPI_Cart_coords(cart_comm,my_rank,2,coords);
-    std::cout<<my_rank<<" "<<coords[0]<<" "<<coords[1]<< std::endl;
+    //init movement, for (i,j) move its sub_A i-times and sub_B j-times
     MPI_Cart_shift(cart_comm, 0, coords[1], &udlr[0], &udlr[1]);
     MPI_Cart_shift(cart_comm, 1, coords[0], &udlr[2], &udlr[3]);
-    std::cout << my_rank << " " << udlr[0] << " " << udlr[1] << " " << udlr[2] << " " << udlr[3] << std::endl;
-
     MPI_Sendrecv_replace(sub_A.data(),m_size*l_size, MPI_DOUBLE, udlr[2], 1, udlr[3], 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     MPI_Sendrecv_replace(sub_B.data(),l_size*n_size, MPI_DOUBLE, udlr[0], 2, udlr[1], 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
@@ -122,6 +120,8 @@ int main(int argc, char* argv[]){
             }
         }
         MPI_Barrier(cart_comm);
+        MPI_Cart_shift(cart_comm,0,1,&udlr[0],&udlr[1]);
+        MPI_Cart_shift(cart_comm,1,1,&udlr[2],&udlr[3]);
         MPI_Sendrecv_replace(sub_A.data(),m_size*l_size,MPI_DOUBLE,udlr[2],3,udlr[3],3,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
         MPI_Sendrecv_replace(sub_B.data(),l_size*n_size,MPI_DOUBLE,udlr[0],4,udlr[1],4,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
     }
@@ -131,5 +131,14 @@ int main(int argc, char* argv[]){
     auto time = end_time - start_time;
     double ns = time.count();                   // time in nanoseconds
     MPI_Barrier(MPI_COMM_WORLD);
+    double min = 0;
+    double max = 0;
+    double avg = 0;
+
+    MPI_Allreduce(&ns, &min, 1, MPI_DOUBLE, MPI_MIN, MPI_COMM_WORLD);
+    MPI_Allreduce(&ns, &max, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
+    MPI_Allreduce(&ns, &avg, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+    avg /= n_ranks;
+    std::cout<<"min: "<<min<<", max: "<<max<<", avg: "<<avg<<std::endl;
     MPI_Finalize();
 }
