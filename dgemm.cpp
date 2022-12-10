@@ -127,6 +127,19 @@ int main(int argc, char* argv[]){
     }
     // Gather all the result
     MPI_Gather(sub_C.data(),m_size*n_size,MPI_DOUBLE,C_v.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    //re-order
+    if(my_rank==0){
+        std::vector<double> result(m_size*n_size*n_ranks);
+        for(int i=0;i<k;++i){
+            for (int j = 0; j < k; ++j) {
+                for (int m = 0; m < m_size; ++m) {
+                    std::copy(C_v.begin()+(i*k+j)*(m_size*n_size)+m*n_size,
+                              C_v.begin()+(i*k+j)*(m_size*n_size)+m*n_size+n_size,
+                              result.begin()+(i*m_size+m)*nn+j*n_size);
+                }
+            }
+        }
+    }
     auto end_time = std::chrono::steady_clock::now();
     auto time = end_time - start_time;
     double ns = time.count()/1000000;                   // time in nanoseconds
