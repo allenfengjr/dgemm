@@ -1,3 +1,0 @@
-/Users/haofeng-admin/dgemm/cmake-build-release/CMakeFiles/dgemm.dir
-/Users/haofeng-admin/dgemm/cmake-build-release/CMakeFiles/edit_cache.dir
-/Users/haofeng-admin/dgemm/cmake-build-release/CMakeFiles/rebuild_cache.dir

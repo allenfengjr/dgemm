@@ -125,7 +125,7 @@ int main(int argc, char* argv[]){
         MPI_Sendrecv_replace(sub_A.data(),m_size*l_size,MPI_DOUBLE,udlr[2],3,udlr[3],3,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
         MPI_Sendrecv_replace(sub_B.data(),l_size*n_size,MPI_DOUBLE,udlr[0],4,udlr[1],4,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
     }
-    // Gather all the result
+    // 4. Gather all the result and re-order
     MPI_Gather(sub_C.data(),m_size*n_size,MPI_DOUBLE,C_v.data(),m_size*n_size,MPI_DOUBLE,0,MPI_COMM_WORLD);
     //re-order
     if(my_rank==0){
